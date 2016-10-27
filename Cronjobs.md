@@ -9,7 +9,7 @@ Para que possa configurar o cronjob do Mautic corretamente, é recomendado que r
 1. Acessar o SSH com usuário Root ou com Permissões Root.
 2. Para Nginx - Executar ```crontab -u www-data -e``` | Para Apache - Executar ```crontab -u nobody -e```
 3. Copie os Cronjobs listados abaixo, e modifique colocando o caminho da pasta raiz do Mautic em seu servidor.
-4. Cole os seus Cronjobs e aperte *crtl + w* e depois aperte *y* e *enter*.
+4. Cole os seus Cronjobs e aperte *crtl + x* e depois aperte *y* e *enter*.
 
 ## Lista de Cronjobs
 ```
