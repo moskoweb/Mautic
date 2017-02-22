@@ -20,8 +20,9 @@ Para que possa configurar o cronjob do Mautic corretamente, é recomendado que r
 3,7,11,16,20,24,28,33,37,41,46,50,54,58 * * * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:campaigns:rebuild --force --batch-limit=100
 3,7,11,16,20,24,28,33,37,41,46,50,54,58 * * * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:campaigns:trigger --force --batch-limit=100
 
-# Cron para Envio dos email, se configurado para enviar Em Fila e para Agendamento de Envios
+# Cron para Envio dos email e Mensagem de Marketing
 4,8,12,17,21,25,29,34,38,42,47,51,55,59 * * * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:emails:send
+4,8,12,17,21,25,29,34,38,42,47,51,55,59 * * * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:messages:send
 
 # Cron para Processar os Email em Bounce
 0,15,30,45 * * * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:email:fetch
@@ -35,8 +36,20 @@ Para que possa configurar o cronjob do Mautic corretamente, é recomendado que r
 # Cron para Atualização da Base de Localição do Lead pelo IP
 0 0 20 * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:iplookup:download
 
+# Limpeza de Contatos sem Ação a Mais de 180 Dias
+0 0 20 * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:maintenance:cleanup --days-old=180
+
+# Agendamento de Envio Broadcast - Para Configurar Ajustar Começo com Minuto Hora Dia Mês (*) Semana
+# Ex.: Envio de Email Dia 22 de Fevereiro às 08:30 da Manhã = Inicio do Cron 30 8 22 2 * php...
+# Para facilitar pode usar o gerado nesse site: http://crontab-generator.org/
+0 0 20 * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:broadcasts:send --channel=email --id=ID
+
+
 # Cron para Limpar Cache e Ajuste de Permissões de Pasta
-*/30 * * * * /usr/bin/php /CAMINHOdaATEaPASTAraizDOmautic/app/console cache:clear && chown -R www-data:www-data /CAMINHOdaATEaPASTAraizDOmautic && chmod -R g+rw /CAMINHOdaATEaPASTAraizDOmautic
+# Ajustar CHOWN para as o Usuario:Grupo conforme o do servidor.
+30 * * * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console cache:clear
+30 * * * * chown -R www-data:www-data /CAMINHOdaATEaPASTAraizDOmautic
+30 * * * * chmod -R g+rw /CAMINHOdaATEaPASTAraizDOmautic
 ```
 
 ### Nota
