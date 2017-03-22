@@ -37,12 +37,13 @@ Para que possa configurar o cronjob do Mautic corretamente, é recomendado que r
 0 0 20 * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:iplookup:download
 
 # Limpeza de Contatos sem Ação a Mais de 180 Dias
-0 0 20 * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:maintenance:cleanup --days-old=180
+0 0 20 * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:maintenance:cleanup --days-old=180 --dry-run
 
 # Agendamento de Envio Broadcast - Para Configurar Ajustar Começo com Minuto Hora Dia Mês (*) Semana
 # Ex.: Envio de Email Dia 22 de Fevereiro às 08:30 da Manhã = Inicio do Cron 30 8 22 2 * php...
 # Para facilitar pode usar o gerado nesse site: http://crontab-generator.org/
 0 0 20 * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:broadcasts:send --channel=email --id=ID
+0,10,20,30,40,50 * * * * php /CAMINHOdaATEaPASTAraizDOmautic/app/console mautic:broadcasts:send
 
 
 # Cron para Limpar Cache e Ajuste de Permissões de Pasta
