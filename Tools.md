@@ -50,3 +50,13 @@ php app/console doctrine:migration:status && php app/console doctrine:migration:
 ```
 dpkg-reconfigure tzdata
 ```
+
+---
+
+## Indicação
+
+Caso você não queira se preocupar com esses tipos de manutenção, recomendo que procure contratar alguém de confiança e credibilidade para configurar para você seu Mautic, ou utilize um painel completo de fácil utilização para que possa realizar a sua instalação sem problemas.
+
+Se você está a procura de um painel simples e prático, recomendo para você o painel da [Agius Cloud](https://app.agiuscloud.com/ac/20/), que faz a instação e configuração completa do Mautic para você.
+
+[Clique aqui e Saiba Mais!](https://app.agiuscloud.com/ac/20/)
