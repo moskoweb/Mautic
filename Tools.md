@@ -12,13 +12,13 @@ cd /var/www/dominio.mautic/htdocs/
 
 ## Comandos
 
-#### Limpezado do Cache do Mautic
+### Limpezado do Cache do Mautic
 
 ```
 php app/console cache:clear
 ```
 
-#### Ajustes nas Permissões de Usuário
+### Ajustes nas Permissões de Usuário
 
 ```
 chown -R www-data:www-data *
@@ -26,26 +26,26 @@ chown -R www-data:www-data *
 
 __Ps.:__ Lembrando sempre de trocar o **www-data:www-data** pelo Usuário:Grupo do seu servidor, pois varia conforme configurado o servidor.
 
-#### Ajustes nas Permissões de Arquivos
+### Ajustes nas Permissões de Arquivos
 
 ```
 chmod -R g+rw *
 ```
 
-#### Atualização de Versão
+### Atualização de Versão
 
 ```
 php app/console mautic:update:find && php app/console mautic:update:apply
 ```
 
-#### Atualização do Banco de Dados
+### Atualização do Banco de Dados
 
 ```
 php app/console doctrine:migration:status && php app/console doctrine:migration:migrate -n && php app/console doctrine:schema:update --dump-sql && php app/console doctrine:schema:update --force
 ```
 
 
-#### Ajustar Fuso Horário do Servidor
+### Ajustar Fuso Horário do Servidor
 
 ```
 dpkg-reconfigure tzdata
