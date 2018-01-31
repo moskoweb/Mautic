@@ -1,51 +1,52 @@
-# Limpeza de Cache e Ajuste de Permissões
+# Comandos Úteis para Mautic
 
-Caso você tenha dificuldades para fazer alguns ajustes em sua instalação do Mautic, devido a falta de conhecimento, segue abaixo, um script que irá ajudar você a realizar algumas manutençes que venha a precisar no Mautic.
+Caso você tenha dificuldades para fazer alguns ajustes em sua instalação do Mautic, devido a falta de conhecimento, segue abaixo, um resumo de comandos que irão te ajudar no dia a dia.
 
-## Script
+Todos os comandos estão ajustados e adaptados para serem executados a partir de você estar na pasta raiz do Mautic.
 
-```php
-<?php
+Para navegar no seu Terminal/Putty até o seu Mautic, basta usar o comando ```cd```, exemplo:
 
-/*
- * Password Generator: https://www.dashlane.com/features/password-generator
- * 
- * Actions:
- * 0 = Limpeza do Cache
- * 1 = Ajustes nas Permissões de Usuário
- * 2 = Ajustes nas Permissões de Arquivos
- */
+```
+cd /var/www/dominio.mautic/htdocs/
+```
 
-if ( isset($_GET['pass']) == 'MINHA-SENHA' ) {
-	// Get Actions
-	if (isset($_GET['actions'])) {
-		$actions = $_GET['actions'];
+## Comandos
 
-		// Delimite Actions
-		$actions = ( strpos($actions, ',') !== false ) ? explode(',', $actions) : [0 => $actions];
+#### Limpezado do Cache do Mautic
 
-		foreach ($actions as $action) {
-			switch ($action) {
-			    case 0:
-			        $mautic_cache = shell_exec('php7.0 app/console cache:clear');
-					echo "<h3>Mautic Cache</h3><pre>$mautic_cache</pre><hr>";
-			        break;
-			    case 1:
-			        $permissions_user = shell_exec('chown -R www-data:www-data *');
-					echo "<h3>Permissions User</h3><pre>$permissions_user</pre><hr>";
-			        break;
-			    case 2:
-			        $permissions_files = shell_exec('chmod -R g+rw *');
-					echo "<h3>Permissions Run</h3><pre>$permissions_run</pre><hr>";
-			        break;
-			}
-		}
-	} else {
-		exit('Ação Não Encontradas!');
-	}
-} else {
-	echo "<body style='margin: 0;'><div style='width: 100%; height: 100%; background: url(https://screenshotscdn.firefoxusercontent.com/images/bd6c079d-5a2d-438f-887f-dd2d2c7efdf8.png); background-size: cover;'></div></body>";
-}
+```
+php app/console cache:clear
+```
 
-?>
+#### Ajustes nas Permissões de Usuário
+
+```
+chown -R www-data:www-data *
+```
+
+__Ps.:__ Lembrando sempre de trocar o **www-data:www-data** pelo Usuário:Grupo do seu servidor, pois varia conforme configurado o servidor.
+
+#### Ajustes nas Permissões de Arquivos
+
+```
+chmod -R g+rw *
+```
+
+#### Atualização de Versão
+
+```
+php app/console mautic:update:find && php app/console mautic:update:apply
+```
+
+#### Atualização do Banco de Dados
+
+```
+php app/console doctrine:migration:status && php app/console doctrine:migration:migrate -n && php app/console doctrine:schema:update --dump-sql && php app/console doctrine:schema:update --force
+```
+
+
+#### Ajustar Fuso Horário do Servidor
+
+```
+dpkg-reconfigure tzdata
 ```
