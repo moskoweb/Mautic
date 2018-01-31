@@ -12,7 +12,7 @@ cd /var/www/dominio.mautic/htdocs/
 
 ## Comandos
 
-### Limpezado do Cache do Mautic
+### Limpeza do Cache do Mautic
 
 ```
 php app/console cache:clear
