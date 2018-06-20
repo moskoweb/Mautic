@@ -10,7 +10,7 @@ echo "┣━━━━━━━━━━━━━━━━━━━━━━━�
 echo "┃ Atualização em andamento... ┃"
 echo "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
 
-php app/console mautic:update:find
+php app/console mautic:update:find -q -n
 
 php app/console mautic:update:apply -q -n
 
